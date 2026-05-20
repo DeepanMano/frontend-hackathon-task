@@ -108,7 +108,7 @@ Full acceptance criteria are in the checklist UI and in `DEFAULT_TASKS` inside `
 | 9 | Bug | Fix recent tasks table UI (reference image in modal) |
 | 10 | Bug | Sidebar full page height (reference image in modal) |
 | 11 | Bug | Fix uncaught error on Done tab |
-| 12 | New Task | Integrate bilingual content editor (files from your interviewer) |
+| 12 | New Feature | Integrate bilingual content editor (files from your interviewer) |
 
 ## Suggested time and deliverables
 
