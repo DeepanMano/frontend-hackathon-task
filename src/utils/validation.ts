@@ -16,6 +16,7 @@ export function isLoginFormValid(email: string, password: string): boolean {
 
 export function validateTaskTitle(title: string): string | null {
   const trimmed = title.trim();
+  if (!trimmed) return 'Title is required';
   if (trimmed.length < 3) return 'Title must be at least 3 characters';
   if (trimmed.length > 120) return 'Title is too long';
   return null;
@@ -47,6 +48,8 @@ export function validateTaskStatus(status: string): string | null {
 }
 
 export function validateTaskPriority(priority: string): string | null {
+  if (!priority) return 'Priority is required';
+  if (!TASK_PRIORITIES.includes(priority as TaskPriority)) return 'Invalid priority';
   return null;
 }
 
@@ -60,6 +63,16 @@ export function validateTaskDescription(description: string): string | null {
   if (description.length > 2000) return 'Description is too long (max 2000 characters)';
   return null;
 }
+
+function getLocalTodayDateString() {
+  const d = new Date();
+  // Local timezone YYYY-MM-DD
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 
 export function getTaskFormDefaults(initial?: Task): TaskFormValues {
   if (initial) {
@@ -76,10 +89,11 @@ export function getTaskFormDefaults(initial?: Task): TaskFormValues {
   return {
     title: '',
     description: '',
-    status: '',
+    status: 'todo',
     priority: '',
     assigneeId: '',
-    dueDate: '',
+    dueDate: getLocalTodayDateString(),
+
   };
 }
 
@@ -110,12 +124,14 @@ export const taskFormResolver: Resolver<TaskFormValues> = (values) => {
   const descriptionError = validateTaskDescription(values.description);
   if (descriptionError) errors.description = { type: 'validate', message: descriptionError };
 
- 
+  const statusError = validateTaskStatus(values.status);
+  if (statusError) errors.status = { type: 'validate', message: statusError };
 
   const priorityError = validateTaskPriority(values.priority);
   if (priorityError) errors.priority = { type: 'validate', message: priorityError };
 
-
+  const assigneeError = validateTaskAssignee(values.assigneeId);
+  if (assigneeError) errors.assigneeId = { type: 'validate', message: assigneeError };
 
   const dueDateError = validateDueDate(values.dueDate);
   if (dueDateError) errors.dueDate = { type: 'validate', message: dueDateError };

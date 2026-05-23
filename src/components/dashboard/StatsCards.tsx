@@ -30,13 +30,13 @@ export function StatsCards() {
       },
       {
         label: 'To do',
-        value: data.todo,
+        value: data.todo ?? 0,
         icon: IconList,
         accent: 'from-violet-500 to-violet-600',
       },
       {
         label: 'In progress',
-        value: 0,
+        value: data.inProgress ?? 0,
         icon: IconProgress,
         accent: 'from-blue-500 to-blue-600',
       },
@@ -48,7 +48,7 @@ export function StatsCards() {
       },
       {
         label: 'Blocked',
-        value: null,
+        value: data.blocked ?? 0,
         icon: IconAlert,
         accent: 'from-amber-500 to-orange-600',
       },

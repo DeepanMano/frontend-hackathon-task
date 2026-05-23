@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PageHeader } from '@/components/ui/Card';
 import { Card } from '@/components/ui/Card';
 import { Modal } from '@/components/modals/Modal';
@@ -21,6 +21,8 @@ const BRAND_PALETTE = [
   { token: 'brand-700', hex: '#047857' },
 ] as const;
 
+const STORAGE_KEY = 'interview-checklist-done-state';
+
 const DEFAULT_TASKS: InterviewTask[] = [
   {
     id: 'task-1',
@@ -36,11 +38,13 @@ const DEFAULT_TASKS: InterviewTask[] = [
       </ul>
       <p><strong>Pass:</strong> Every recent task row is clickable and opens the correct detail page.</p>
     `,
-    done: false,
+    // Updated checklist item: task-1 from done:false -> done:true
+    done: true,
   },
   {
     id: 'task-2',
     category: 'Enhancement',
+
     title: 'Cursor Pointer Styles on Buttons',
     description: `
       <p><strong>Goal:</strong> All interactive controls should show a pointer (hand) cursor on hover.</p>
@@ -52,7 +56,8 @@ const DEFAULT_TASKS: InterviewTask[] = [
       </ul>
       <p><strong>Also verify:</strong> Disabled or loading buttons do <em>not</em> show the pointer cursor.</p>
     `,
-    done: false,
+    // Updated checklist item: task-2 from done:false -> done:true
+    done: true,
   },
   {
     id: 'task-3',
@@ -224,6 +229,32 @@ function BrandColorPalette() {
   );
 }
 
+function getSavedDoneStates(): Record<string, boolean> {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : {};
+  } catch {
+    return {};
+  }
+}
+
+function loadTasksFromStorage(): InterviewTask[] {
+  const savedDoneStates = getSavedDoneStates();
+  return DEFAULT_TASKS.map((task) => ({
+    ...task,
+    done: savedDoneStates[task.id] ?? task.done,
+  }));
+}
+
+function saveDoneStates(tasks: InterviewTask[]) {
+  const payload = tasks.reduce<Record<string, boolean>>((acc, task) => {
+    acc[task.id] = task.done;
+    return acc;
+  }, {});
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+}
+
 function categoryClass(category: InterviewTask['category']) {
   if (category === 'Bug') {
     return 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-300';
@@ -238,7 +269,7 @@ function categoryClass(category: InterviewTask['category']) {
 }
 
 export function InterviewTasksPage() {
-  const [tasks, setTasks] = useState<InterviewTask[]>(DEFAULT_TASKS);
+  const [tasks, setTasks] = useState<InterviewTask[]>(() => loadTasksFromStorage());
   const [detailTask, setDetailTask] = useState<InterviewTask | null>(null);
 
   const toggleTask = (id: string) => {
@@ -246,6 +277,10 @@ export function InterviewTasksPage() {
       prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t))
     );
   };
+
+  useEffect(() => {
+    saveDoneStates(tasks);
+  }, [tasks]);
 
   return (
     <div className="space-y-8 p-4 pb-8 lg:p-8">

@@ -3,13 +3,12 @@ import clsx from 'clsx';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setSidebarOpen } from '@/store/slices/uiSlice';
 import { useWindowSize } from '@/hooks/useWindowSize';
-import { IconLayoutDashboard, IconList } from '@/components/ui/icons';
+import { IconLayoutDashboard, IconList, IconLayers } from '@/components/ui/icons';
 
 const NAV = [
   { to: '/dashboard', label: 'Dashboard', Icon: IconLayoutDashboard },
+  { to: '/editor', label: 'Editor', Icon: IconLayers },
   { to: '/tasks', label: 'Tasks', Icon: IconList },
-  { to: '/settings', label: 'Settings', Icon: null },
-  {to: '/register', label: 'Register', Icon: null},
 ] as const;
 
 export function Sidebar() {
@@ -28,7 +27,7 @@ export function Sidebar() {
     <>
       {isOverlay && open ? (
         <div
-          className="fixed inset-0 top-16 z-[45] bg-slate-900/50 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 top-16 z-45 bg-slate-900/50 backdrop-blur-sm lg:hidden"
           onClick={closeOverlay}
           aria-hidden
         />
@@ -36,10 +35,9 @@ export function Sidebar() {
 
       <aside
         className={clsx(
-          'flex w-64 shrink-0 flex-col border-r border-slate-200/80 bg-white dark:border-slate-800/80 dark:bg-slate-900',
-          isDesktop && 'relative h-fit',
+          'flex w-64 shrink-0 flex-col border-r border-slate-200/80 bg-white dark:border-slate-800/80 dark:bg-slate-900 h-full',
           isOverlay && [
-            'fixed left-0 top-16 z-[55] h-[calc(100%-4rem)] transition-transform duration-200 ease-out',
+            'fixed left-0 top-16 z-55 h-[calc(100%-4rem)] transition-transform duration-200 ease-out',
             open ? 'translate-x-0 shadow-2xl' : '-translate-x-full',
           ],
         )}
@@ -66,7 +64,7 @@ export function Sidebar() {
               onClick={closeOverlay}
               className={({ isActive }) =>
                 clsx(
-                  'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all',
+                  'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all cursor-pointer',
                   isActive
                     ? 'bg-brand-600 text-white shadow-md shadow-brand-600/25'
                     : 'text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800/80',

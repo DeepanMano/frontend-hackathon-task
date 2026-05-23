@@ -64,7 +64,7 @@ export function Header({ title }: { title: string }) {
         <button
           type="button"
           aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-          onClick={toggleTheme()}
+          onClick={toggleTheme}
           className="cursor-pointer rounded-xl p-2.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200"
         >
           {theme === 'light' ? <IconMoon size={18} /> : <IconSun size={18} />}

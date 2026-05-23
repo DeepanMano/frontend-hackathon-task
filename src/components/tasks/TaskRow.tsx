@@ -24,9 +24,9 @@ export function TaskRow({ task, onEdit, onDelete, onSelect }: TaskRowProps) {
           className="line-clamp-2 break-words font-medium text-slate-900 dark:text-slate-100"
           title={task.title}
         >
-          {task.title?.trim()}
+          {task.title?.trim() || ''}
         </div>
-        <div className="mt-0.5 text-xs text-slate-500">{task.projectName.trim() || ''}</div>
+        <div className="mt-0.5 text-xs text-slate-500">{task.projectName?.trim() || ''}</div>
       </td>
       <td className="px-5 py-4">
         <StatusBadge status={task.status} />
