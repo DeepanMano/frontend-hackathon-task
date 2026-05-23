@@ -14,9 +14,12 @@ interface StatCard {
 }
 
 export function StatsCards() {
+  // Fixed by Chandu - Added refetch options to ensure stats always show fresh data
   const { data } = useQuery({
     queryKey: ['task-stats'],
     queryFn: async () => getTaskStats(),
+    refetchOnWindowFocus: true,
+    refetchOnMount: true,
   });
 
   const stats = useMemo<StatCard[]>(() => {
@@ -36,9 +39,16 @@ export function StatsCards() {
       },
       {
         label: 'In progress',
-        value: 0,
+        value: data.inProgress,
         icon: IconProgress,
         accent: 'from-blue-500 to-blue-600',
+      },
+      // Fixed by Chandu - Added Review status card
+      {
+        label: 'Review',
+        value: data.review,
+        icon: IconAlert,
+        accent: 'from-amber-500 to-yellow-600',
       },
       {
         label: 'Completed',
@@ -48,15 +58,16 @@ export function StatsCards() {
       },
       {
         label: 'Blocked',
-        value: null,
+        value: data.blocked,
         icon: IconAlert,
-        accent: 'from-amber-500 to-orange-600',
+        accent: 'from-red-500 to-orange-600',
       },
     ];
   }, [data]);
 
+  // Fixed by Chandu - Updated grid columns to accommodate 6 stat cards
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
       {stats.map((card) => (
         <Card key={card.label} interactive className="relative overflow-hidden">
           <div

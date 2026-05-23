@@ -73,13 +73,16 @@ export function getTaskFormDefaults(initial?: Task): TaskFormValues {
     };
   }
 
+  const today = new Date().toISOString().slice(0, 10);
+
+  // Fixed by Chandu - Set default status to 'todo' and due date to today
   return {
     title: '',
     description: '',
-    status: '',
+    status: 'todo',
     priority: '',
     assigneeId: '',
-    dueDate: '',
+    dueDate: today,
   };
 }
 
@@ -110,12 +113,14 @@ export const taskFormResolver: Resolver<TaskFormValues> = (values) => {
   const descriptionError = validateTaskDescription(values.description);
   if (descriptionError) errors.description = { type: 'validate', message: descriptionError };
 
- 
+  const statusError = validateTaskStatus(values.status);
+  if (statusError) errors.status = { type: 'validate', message: statusError };
 
   const priorityError = validateTaskPriority(values.priority);
   if (priorityError) errors.priority = { type: 'validate', message: priorityError };
 
-
+  const assigneeError = validateTaskAssignee(values.assigneeId);
+  if (assigneeError) errors.assigneeId = { type: 'validate', message: assigneeError };
 
   const dueDateError = validateDueDate(values.dueDate);
   if (dueDateError) errors.dueDate = { type: 'validate', message: dueDateError };

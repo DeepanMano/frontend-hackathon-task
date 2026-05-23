@@ -36,7 +36,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
       </ul>
       <p><strong>Pass:</strong> Every recent task row is clickable and opens the correct detail page.</p>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-2',
@@ -52,7 +52,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
       </ul>
       <p><strong>Also verify:</strong> Disabled or loading buttons do <em>not</em> show the pointer cursor.</p>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-3',
@@ -67,7 +67,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
         <li>All major surfaces (header, sidebar, cards, forms) reflect the selected theme</li>
       </ul>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-4',
@@ -82,7 +82,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
         <li>Remaining nav links still work without console errors</li>
       </ul>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-5',
@@ -105,7 +105,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
         </li>
       </ul>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-6',
@@ -122,7 +122,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
       </ul>
       <p><strong>Also verify:</strong> Counts update after creating, editing, or deleting tasks.</p>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-7',
@@ -131,7 +131,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
     description: `
       <p><strong>Verify:</strong> Buttons, links, sidebar active state, and focus rings use the new palette in light and dark mode.</p>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-8',
@@ -146,7 +146,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
         <li>There should not be any uncaught errors in the console</li>
       </ul>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-9',
@@ -160,7 +160,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
       </a>
       <p><strong>Pass:</strong> Recent tasks visually match the reference screenshot in both light and dark mode.</p>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-10',
@@ -174,7 +174,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
       </a>
       <p><strong>Pass:</strong> Sidebar layout matches the reference screenshot (full viewport height, correct alignment).</p>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-11',
@@ -183,7 +183,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
     description: `
       <p><strong>Goal:</strong> Fix the uncaught error on the Tasks page when switching to the <strong>Done</strong> tab.</p>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-12',
@@ -196,7 +196,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
         <li>Register an <code>/editor</code> route and render the copied editor when Editor is clicked</li>
       </ul>
     `,
-    done: false,
+    done: true,
   },
 ];
 

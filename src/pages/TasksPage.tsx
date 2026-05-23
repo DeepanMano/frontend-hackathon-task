@@ -140,7 +140,8 @@ export function TasksPage() {
     if (!deleteTarget) return;
     setDeleting(true);
     try {
-      await deleteTask(deleteTarget);
+      // Fixed by Chandu - Pass deleteTarget.id (string) instead of entire task object
+      await deleteTask(deleteTarget.id);
       dispatch(removeTaskLocal(deleteTarget.id));
       await queryClient.invalidateQueries({ queryKey: ['task-stats'] });
       dispatch(pushToast({ type: 'success', message: 'Task deleted' }));
@@ -166,8 +167,9 @@ export function TasksPage() {
         <PageHeader
           title="Tasks"
           description={
+            // Fixed by Chandu - Added review status to header description
             stats
-              ? `${stats.total} total · ${stats.done} completed · ${stats.inProgress} in progress`
+              ? `${stats.total} total · ${stats.done} completed · ${stats.inProgress} in progress · ${stats.review} in review`
               : 'Manage and track your team tasks.'
           }
           action={

@@ -77,10 +77,19 @@ export async function deleteTask(id: string): Promise<void> {
 
 export function getTaskStats() {
   const tasks = getTasksSnapshot();
+  const todo = tasks.filter((t) => t.status === 'todo').length;
+  const inProgress = tasks.filter((t) => t.status === 'in_progress').length;
+  const review = tasks.filter((t) => t.status === 'review').length;
+  const done = tasks.filter((t) => t.status === 'done').length;
+  const blocked = tasks.filter((t) => t.status === 'blocked').length;
+  
+  // Fixed by Chandu - Changed total to be calculated as sum of all status counts including review
   return {
-    total: tasks.length,
-    inProgress: tasks.filter((t) => t.status === 'in_progress').length,
-    done: tasks.filter((t) => t.status === 'done').length,
-    blocked: tasks.filter((t) => t.status === 'blocked').length,
+    total: todo + inProgress + review + done + blocked,
+    todo,
+    inProgress,
+    review,
+    done,
+    blocked,
   };
 }

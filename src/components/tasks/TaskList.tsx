@@ -54,12 +54,14 @@ export function TaskList({
               <th className="px-5 py-3.5 text-right">Actions</th>
             </tr>
           </thead>
+          {/* Fixed by Chandu - Passed onDelete prop to TaskRow */}
           <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
             {tasks.map((task) => (
               <TaskRow
                 key={task.id}
                 task={task}
                 onEdit={onEdit}
+                onDelete={onDelete}
                 onSelect={onSelect}
               />
             ))}

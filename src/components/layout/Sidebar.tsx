@@ -3,13 +3,13 @@ import clsx from 'clsx';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setSidebarOpen } from '@/store/slices/uiSlice';
 import { useWindowSize } from '@/hooks/useWindowSize';
-import { IconLayoutDashboard, IconList } from '@/components/ui/icons';
+import { IconLayoutDashboard, IconList, IconSearch } from '@/components/ui/icons';
 
 const NAV = [
   { to: '/dashboard', label: 'Dashboard', Icon: IconLayoutDashboard },
+  // Fixed by Chandu - Added Editor item between Dashboard and Tasks
+  { to: '/editor', label: 'Editor', Icon: IconSearch },
   { to: '/tasks', label: 'Tasks', Icon: IconList },
-  { to: '/settings', label: 'Settings', Icon: null },
-  {to: '/register', label: 'Register', Icon: null},
 ] as const;
 
 export function Sidebar() {
@@ -37,7 +37,8 @@ export function Sidebar() {
       <aside
         className={clsx(
           'flex w-64 shrink-0 flex-col border-r border-slate-200/80 bg-white dark:border-slate-800/80 dark:bg-slate-900',
-          isDesktop && 'relative h-fit',
+          // Fixed by Chandu - Changed desktop sidebar height from h-fit to h-[calc(100vh-4rem)]
+          isDesktop && 'relative h-[calc(100vh-4rem)]',
           isOverlay && [
             'fixed left-0 top-16 z-[55] h-[calc(100%-4rem)] transition-transform duration-200 ease-out',
             open ? 'translate-x-0 shadow-2xl' : '-translate-x-full',

@@ -26,7 +26,8 @@ export function TaskRow({ task, onEdit, onDelete, onSelect }: TaskRowProps) {
         >
           {task.title?.trim()}
         </div>
-        <div className="mt-0.5 text-xs text-slate-500">{task.projectName.trim() || ''}</div>
+        {/* Fixed by Chandu - Added optional chaining to prevent runtime error */}
+        <div className="mt-0.5 text-xs text-slate-500">{task.projectName?.trim() || ''}</div>
       </td>
       <td className="px-5 py-4">
         <StatusBadge status={task.status} />

@@ -32,14 +32,20 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     localStorage.setItem(THEME_STORAGE_KEY, theme);
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   }, [theme]);
 
   const setTheme = useCallback((t: Theme) => {
     setThemeState(t);
   }, []);
 
+  // Fixed by Chandu - Corrected toggle logic to switch between light and dark
   const toggleTheme = useCallback(() => {
-    setThemeState((prev) => (prev === 'light' ? 'light' : 'light'));
+    setThemeState((prev) => (prev === 'light' ? 'dark' : 'light'));
   }, []);
 
   const value = useMemo(

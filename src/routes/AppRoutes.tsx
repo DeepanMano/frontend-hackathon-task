@@ -8,6 +8,7 @@ import { InterviewTasksPage } from '@/pages/InterviewTasksPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { ProtectedRoute } from './ProtectedRoute';
 import { RegisterPage } from '@/pages/RegisterPage.tsx';
+import { EditorPage } from '@/pages/EditorPage';
 
 export function AppRoutes() {
   return (
@@ -24,6 +25,8 @@ export function AppRoutes() {
         >
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="dashboard" element={<DashboardPage />} />
+          {/* Fixed by Chandu - Added /editor route for bilingual content editor */}
+          <Route path="editor" element={<EditorPage />} />
           <Route path="tasks" element={<TasksPage />} />
           <Route path="tasks/:id" element={<TaskDetailPage />} />
           <Route path="interview-tasks" element={<InterviewTasksPage />} />
