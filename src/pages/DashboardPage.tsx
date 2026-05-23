@@ -3,10 +3,17 @@ import { StatsCards } from '@/components/dashboard/StatsCards';
 import { QuickActions } from '@/components/dashboard/QuickActions';
 import { TaskListLegacy } from '@/components/tasks/TaskListLegacy';
 import { Card } from '@/components/ui/Card';
-import { getTasksSnapshot } from '@/mocks/taskStore';
+import { useQuery } from '@tanstack/react-query';
+import { fetchTasks } from '@/services/taskService';
 
 export function DashboardPage() {
-  const recent = getTasksSnapshot().slice(0, 8);
+  // Fixed by Deepan — replaced getTasksSnapshot() with useQuery for live reactive data
+  const { data } = useQuery({
+    queryKey: ['tasks', 'recent'],
+    queryFn: () => fetchTasks({ status: 'all', search: '' }, 0, 8),
+  });
+
+  const recent = data?.data ?? [];
 
   return (
     <div className="space-y-8 p-4 pb-8 lg:p-8">
@@ -27,4 +34,3 @@ export function DashboardPage() {
     </div>
   );
 }
-

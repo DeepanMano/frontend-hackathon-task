@@ -21,39 +21,39 @@ export function StatsCards() {
 
   const stats = useMemo<StatCard[]>(() => {
     if (!data) return [];
-    return [
-      {
-        label: 'Total tasks',
-        value: data.total,
-        icon: IconLayers,
-        accent: 'from-brand-500 to-brand-600',
-      },
-      {
-        label: 'To do',
-        value: data.todo,
-        icon: IconList,
-        accent: 'from-violet-500 to-violet-600',
-      },
-      {
-        label: 'In progress',
-        value: 0,
-        icon: IconProgress,
-        accent: 'from-blue-500 to-blue-600',
-      },
-      {
-        label: 'Completed',
-        value: data.done,
-        icon: IconCheckCircle,
-        accent: 'from-emerald-500 to-emerald-600',
-      },
-      {
-        label: 'Blocked',
-        value: null,
-        icon: IconAlert,
-        accent: 'from-amber-500 to-orange-600',
-      },
-    ];
-  }, [data]);
+     // Fixed by Deepan — todo used wrong key, inProgress hardcoded to 0, blocked hardcoded to null
+return [
+  {
+    label: 'Total tasks',
+    value: data.total,
+    icon: IconLayers,
+    accent: 'from-brand-500 to-brand-600',
+  },
+  {
+    label: 'To do',
+    value: data.todo,
+    icon: IconList,
+    accent: 'from-violet-500 to-violet-600',
+  },
+  {
+    label: 'In progress',
+    value: data.inProgress,
+    icon: IconProgress,
+    accent: 'from-blue-500 to-blue-600',
+  },
+  {
+    label: 'Completed',
+    value: data.done,
+    icon: IconCheckCircle,
+    accent: 'from-emerald-500 to-emerald-600',
+  },
+  {
+    label: 'Blocked',
+    value: data.blocked,
+    icon: IconAlert,
+    accent: 'from-amber-500 to-orange-600',
+  },
+]; [data]);
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">

@@ -46,7 +46,10 @@ export function validateTaskStatus(status: string): string | null {
   return null;
 }
 
+// Fixed by Deepan — priority was never validated, always returned null
 export function validateTaskPriority(priority: string): string | null {
+  if (!priority) return 'Priority is required';
+  if (!TASK_PRIORITIES.includes(priority as TaskPriority)) return 'Invalid priority';
   return null;
 }
 
@@ -61,6 +64,7 @@ export function validateTaskDescription(description: string): string | null {
   return null;
 }
 
+// Fixed by Deepan — status defaults to 'todo', dueDate defaults to today
 export function getTaskFormDefaults(initial?: Task): TaskFormValues {
   if (initial) {
     return {
@@ -76,10 +80,10 @@ export function getTaskFormDefaults(initial?: Task): TaskFormValues {
   return {
     title: '',
     description: '',
-    status: '',
+    status: 'todo',
     priority: '',
     assigneeId: '',
-    dueDate: '',
+    dueDate: new Date().toISOString().slice(0, 10),
   };
 }
 
@@ -101,6 +105,7 @@ export function normalizeTaskFormValues(values: TaskFormValues): {
   };
 }
 
+// Fixed by Deepan — added missing status and assignee validation in resolver
 export const taskFormResolver: Resolver<TaskFormValues> = (values) => {
   const errors: Record<string, { type: string; message: string }> = {};
 
@@ -110,12 +115,14 @@ export const taskFormResolver: Resolver<TaskFormValues> = (values) => {
   const descriptionError = validateTaskDescription(values.description);
   if (descriptionError) errors.description = { type: 'validate', message: descriptionError };
 
- 
+  const statusError = validateTaskStatus(values.status);
+  if (statusError) errors.status = { type: 'validate', message: statusError };
 
   const priorityError = validateTaskPriority(values.priority);
   if (priorityError) errors.priority = { type: 'validate', message: priorityError };
 
-
+  const assigneeError = validateTaskAssignee(values.assigneeId);
+  if (assigneeError) errors.assigneeId = { type: 'validate', message: assigneeError };
 
   const dueDateError = validateDueDate(values.dueDate);
   if (dueDateError) errors.dueDate = { type: 'validate', message: dueDateError };

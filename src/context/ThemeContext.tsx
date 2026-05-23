@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import {
   createContext,
   useCallback,
@@ -31,6 +30,13 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(() => readThemeFromStorage());
 
   useEffect(() => {
+    // Fixed by Deepan — apply dark class to document root for Tailwind dark mode
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
     localStorage.setItem(THEME_STORAGE_KEY, theme);
   }, [theme]);
 
@@ -38,8 +44,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setThemeState(t);
   }, []);
 
+  // Fixed by Deepan — was always returning 'light', never switching to dark
   const toggleTheme = useCallback(() => {
-    setThemeState((prev) => (prev === 'light' ? 'light' : 'light'));
+    setThemeState((prev) => (prev === 'light' ? 'dark' : 'light'));
   }, []);
 
   const value = useMemo(

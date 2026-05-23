@@ -1,3 +1,4 @@
+import type { Task } from '@/types'; 
 import type { PaginatedResponse, Task, TaskFilters, TaskStatus } from '@/types';
 import { MOCK_USERS } from '@/mocks/users';
 import {
@@ -69,16 +70,19 @@ export async function updateTask(id: string, updates: Partial<Task>): Promise<Ta
   return updated;
 }
 
-export async function deleteTask(id: string): Promise<void> {
+// Fixed by Deepan — changed parameter from string to Task object to match how it's called in TasksPage
+export async function deleteTask(task: Task): Promise<void> {
   await mockDelay(200, 450);
-  const all = getTasksSnapshot().filter((t) => t.id !== id);
+  const all = getTasksSnapshot().filter((t) => t.id !== task.id);
   setTasksSnapshot(all);
 }
 
+// Fixed by Deepan — added missing todo count to stats
 export function getTaskStats() {
   const tasks = getTasksSnapshot();
   return {
     total: tasks.length,
+    todo: tasks.filter((t) => t.status === 'todo').length,
     inProgress: tasks.filter((t) => t.status === 'in_progress').length,
     done: tasks.filter((t) => t.status === 'done').length,
     blocked: tasks.filter((t) => t.status === 'blocked').length,
