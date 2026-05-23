@@ -60,6 +60,7 @@ export function TaskList({
                 key={task.id}
                 task={task}
                 onEdit={onEdit}
+                onDelete={onDelete}
                 onSelect={onSelect}
               />
             ))}

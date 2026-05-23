@@ -34,6 +34,18 @@ function FieldError({ message }: { message?: string }) {
   return <p className="mt-1 text-xs font-medium text-red-600 dark:text-red-400">{message}</p>;
 }
 
+function RequiredLabel({ htmlFor, children }: { htmlFor: string; children: React.ReactNode }) {
+  return (
+    <label
+      htmlFor={htmlFor}
+      className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300"
+    >
+      {children}
+      <span style={{ color: '#FF0000' }} className="ml-0.5">*</span>
+    </label>
+  );
+}
+
 export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormProps) {
   const {
     register,
@@ -52,7 +64,7 @@ export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormPr
   }, [initial, reset]);
 
   const isEditMode = Boolean(initial);
-  const submitDisabled = submitting || (isEditMode && !isDirty) ;
+  const submitDisabled = submitting || (isEditMode && !isDirty);
 
   return (
     <form
@@ -62,6 +74,7 @@ export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormPr
     >
       <Input
         label="Title"
+        required
         error={errors.title?.message}
         {...register('title')}
       />
@@ -84,12 +97,7 @@ export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormPr
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label
-            htmlFor="task-status"
-            className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300"
-          >
-            Status
-          </label>
+          <RequiredLabel htmlFor="task-status">Status</RequiredLabel>
           <select id="task-status" className={selectClassName(Boolean(errors.status))} {...register('status')}>
             <option value="">Select status...</option>
             <option value="todo">To Do</option>
@@ -101,12 +109,7 @@ export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormPr
           <FieldError message={errors.status?.message} />
         </div>
         <div>
-          <label
-            htmlFor="task-priority"
-            className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300"
-          >
-            Priority
-          </label>
+          <RequiredLabel htmlFor="task-priority">Priority</RequiredLabel>
           <select
             id="task-priority"
             className={selectClassName(Boolean(errors.priority))}
@@ -124,12 +127,7 @@ export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormPr
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label
-            htmlFor="task-assignee"
-            className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300"
-          >
-            Assignee
-          </label>
+          <RequiredLabel htmlFor="task-assignee">Assignee</RequiredLabel>
           <select
             id="task-assignee"
             className={selectClassName(Boolean(errors.assigneeId))}
@@ -147,6 +145,7 @@ export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormPr
         <Input
           label="Due date"
           type="date"
+          required
           error={errors.dueDate?.message}
           {...register('dueDate')}
         />

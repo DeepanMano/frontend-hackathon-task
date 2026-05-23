@@ -22,6 +22,7 @@ import {
 import { openTaskModal, pushToast } from '@/store/slices/uiSlice';
 import { deleteTask, fetchTasks, getTaskStats } from '@/services/taskService';
 import type { Task, TaskStatus } from '@/types';
+
 const PAGE_SIZE = 10;
 
 function buildSearchParams(
@@ -140,7 +141,7 @@ export function TasksPage() {
     if (!deleteTarget) return;
     setDeleting(true);
     try {
-      await deleteTask(deleteTarget);
+      await deleteTask(deleteTarget.id);
       dispatch(removeTaskLocal(deleteTarget.id));
       await queryClient.invalidateQueries({ queryKey: ['task-stats'] });
       dispatch(pushToast({ type: 'success', message: 'Task deleted' }));
