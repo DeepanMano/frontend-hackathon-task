@@ -160,11 +160,3 @@ public/
 ```
 
 Path alias `@/` maps to `src/` (see `vite.config.ts` / `tsconfig`).
-
-## Questions during the session
-
-Ask your interviewer for **scope** (which tasks are required), **timebox**, and the **bilingual editor package** for task 12. Do not expect solution guides in this repository — requirements live in the app checklist and this README.
-
-## License
-
-Provided for interview and assessment use by your hiring team.
