@@ -110,27 +110,6 @@ Full acceptance criteria are in the checklist UI and in `DEFAULT_TASKS` inside `
 | 11 | Bug | Fix uncaught error on Done tab |
 | 12 | New Feature | Integrate bilingual content editor (files from your interviewer) |
 
-## Suggested time and deliverables
-
-Spend roughly **2–3 hours** (or as directed by your interviewer) on some or all of:
-
-1. Reproducible bug reports with steps.
-2. Fixes for checklist items you can complete.
-3. Brief notes on performance, accessibility, or TypeScript improvements you would make next.
-4. A short explanation of how you debugged each issue you fixed.
-
-## What we evaluate
-
-| Area | What to demonstrate |
-|------|---------------------|
-| React fundamentals | State, effects, immutability, component boundaries |
-| State management | Redux as single source of truth; no direct mutation |
-| Debugging | Clear repro steps; console/network; isolating components |
-| Performance | Leaks, redundant fetches, expensive renders, memoization |
-| TypeScript | Safe optional access; tighter types; fewer unsafe casts |
-| Code quality | Focused changes; clear naming; minimal unrelated refactors |
-| Architecture | API vs UI state; query invalidation; routing and URL sync |
-| Attention to detail | Mobile layout, a11y, edge cases, async behavior |
 
 ## Scripts
 
