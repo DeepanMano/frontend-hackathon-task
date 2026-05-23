@@ -4,9 +4,11 @@ import { QuickActions } from '@/components/dashboard/QuickActions';
 import { TaskListLegacy } from '@/components/tasks/TaskListLegacy';
 import { Card } from '@/components/ui/Card';
 import { getTasksSnapshot } from '@/mocks/taskStore';
+import {useNavigate } from 'react-router-dom';
 
 export function DashboardPage() {
   const recent = getTasksSnapshot().slice(0, 8);
+  const navigate = useNavigate();
 
   return (
     <div className="space-y-8 p-4 pb-8 lg:p-8">
@@ -21,7 +23,10 @@ export function DashboardPage() {
           Recent tasks
         </h3>
         <Card padding="none">
-          <TaskListLegacy tasks={recent} />
+          <TaskListLegacy
+            tasks={recent}
+           onSelect={(task) => navigate(`/tasks/${task.id}`)}
+          />
         </Card>
       </section>
     </div>

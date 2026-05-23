@@ -61,7 +61,13 @@ export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormPr
       noValidate
     >
       <Input
-        label="Title"
+        id="task-title"
+        label={
+          <>
+            Title
+            <span className="ml-1 text-[#FF0000]">*</span>
+          </>
+        }
         error={errors.title?.message}
         {...register('title')}
       />
@@ -89,6 +95,7 @@ export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormPr
             className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300"
           >
             Status
+            <span className="ml-1 text-[#FF0000]">*</span>
           </label>
           <select id="task-status" className={selectClassName(Boolean(errors.status))} {...register('status')}>
             <option value="">Select status...</option>
@@ -106,6 +113,7 @@ export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormPr
             className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300"
           >
             Priority
+            <span className="ml-1 text-[#FF0000]">*</span>
           </label>
           <select
             id="task-priority"
@@ -129,6 +137,7 @@ export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormPr
             className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300"
           >
             Assignee
+            <span className="ml-1 text-[#FF0000]">*</span>
           </label>
           <select
             id="task-assignee"
@@ -145,7 +154,13 @@ export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormPr
           <FieldError message={errors.assigneeId?.message} />
         </div>
         <Input
-          label="Due date"
+          id="task-due-date"
+          label={
+            <>
+              Due date
+              <span className="ml-1 text-[#FF0000]">*</span>
+            </>
+          }
           type="date"
           error={errors.dueDate?.message}
           {...register('dueDate')}

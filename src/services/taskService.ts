@@ -79,6 +79,7 @@ export function getTaskStats() {
   const tasks = getTasksSnapshot();
   return {
     total: tasks.length,
+    todo: tasks.filter((t) => t.status === 'todo').length,
     inProgress: tasks.filter((t) => t.status === 'in_progress').length,
     done: tasks.filter((t) => t.status === 'done').length,
     blocked: tasks.filter((t) => t.status === 'blocked').length,

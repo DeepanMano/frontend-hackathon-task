@@ -53,7 +53,7 @@ function ToastItem({
     >
       <div className="flex items-start justify-between gap-2">
         <span>{message}</span>
-        <button type="button" onClick={onClose} className="text-slate-400 hover:text-slate-600">
+        <button type="button" onClick={onClose} className="cursor-pointer text-slate-400 hover:text-slate-600">
           ×
         </button>
       </div>

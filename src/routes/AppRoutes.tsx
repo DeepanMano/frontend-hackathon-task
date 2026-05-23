@@ -7,7 +7,7 @@ import { TaskDetailPage } from '@/pages/TaskDetailPage';
 import { InterviewTasksPage } from '@/pages/InterviewTasksPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { ProtectedRoute } from './ProtectedRoute';
-import { RegisterPage } from '@/pages/RegisterPage.tsx';
+import { RegisterPage } from '@/pages/RegisterPage';
 
 export function AppRoutes() {
   return (

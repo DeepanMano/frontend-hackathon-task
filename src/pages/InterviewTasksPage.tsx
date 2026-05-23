@@ -13,12 +13,16 @@ interface InterviewTask {
 }
 
 const BRAND_PALETTE = [
-  { token: 'brand-50', hex: '#ecfdf5' },
-  { token: 'brand-100', hex: '#d1fae5' },
-  { token: 'brand-200', hex: '#a7f3d0' },
-  { token: 'brand-500', hex: '#10b981' },
-  { token: 'brand-600', hex: '#059669' },
-  { token: 'brand-700', hex: '#047857' },
+  { token: 'brand-50', hex: '#eef2ff' },
+  { token: 'brand-100', hex: '#e0e7ff' },
+  { token: 'brand-200', hex: '#c7d2fe' },
+  { token: 'brand-300', hex: '#a5b4fc' },
+  { token: 'brand-400', hex: '#818cf8' },
+  { token: 'brand-500', hex: '#6366f1' },
+  { token: 'brand-600', hex: '#4f46e5' },
+  { token: 'brand-700', hex: '#4338ca' },
+  { token: 'brand-800', hex: '#3730a3' },
+  { token: 'brand-900', hex: '#312e81' },
 ] as const;
 
 const DEFAULT_TASKS: InterviewTask[] = [
@@ -36,7 +40,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
       </ul>
       <p><strong>Pass:</strong> Every recent task row is clickable and opens the correct detail page.</p>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-2',
@@ -52,7 +56,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
       </ul>
       <p><strong>Also verify:</strong> Disabled or loading buttons do <em>not</em> show the pointer cursor.</p>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-3',
@@ -67,7 +71,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
         <li>All major surfaces (header, sidebar, cards, forms) reflect the selected theme</li>
       </ul>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-4',
@@ -82,7 +86,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
         <li>Remaining nav links still work without console errors</li>
       </ul>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-5',
@@ -105,7 +109,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
         </li>
       </ul>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-6',
@@ -122,7 +126,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
       </ul>
       <p><strong>Also verify:</strong> Counts update after creating, editing, or deleting tasks.</p>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-7',
@@ -131,7 +135,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
     description: `
       <p><strong>Verify:</strong> Buttons, links, sidebar active state, and focus rings use the new palette in light and dark mode.</p>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-8',
@@ -146,7 +150,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
         <li>There should not be any uncaught errors in the console</li>
       </ul>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-9',
@@ -160,7 +164,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
       </a>
       <p><strong>Pass:</strong> Recent tasks visually match the reference screenshot in both light and dark mode.</p>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-10',
@@ -174,7 +178,7 @@ const DEFAULT_TASKS: InterviewTask[] = [
       </a>
       <p><strong>Pass:</strong> Sidebar layout matches the reference screenshot (full viewport height, correct alignment).</p>
     `,
-    done: false,
+    done: true,
   },
   {
     id: 'task-11',

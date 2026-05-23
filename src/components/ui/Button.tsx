@@ -16,11 +16,15 @@ export function Button({
   disabled,
   children,
   ...props
+  
 }: ButtonProps) {
+  const isDisabled = disabled || loading;
   return (
     <button
       className={clsx(
-        'inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:focus-visible:ring-offset-slate-900',
+      'inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900',
+
+        isDisabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
         variant === 'primary' &&
           'bg-brand-600 text-white shadow-sm shadow-brand-600/30 hover:bg-brand-700 active:scale-[0.98] dark:bg-brand-600 dark:hover:bg-brand-500',
         variant === 'secondary' &&

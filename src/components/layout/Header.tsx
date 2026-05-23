@@ -1,13 +1,14 @@
-import { NavLink } from 'react-router-dom';
-import clsx from 'clsx';
+// import { NavLink } from 'react-router-dom';
+// import clsx from 'clsx';
 import { useTheme } from '@/context/ThemeContext';
 import { NotificationBell } from '@/components/notifications/NotificationBell';
 import { useAppDispatch } from '@/store/hooks';
 import { toggleSidebar } from '@/store/slices/uiSlice';
-import { IconMenu, IconMoon, IconSun, IconCheckCircle } from '@/components/ui/icons';
+import { IconMenu, IconMoon, IconSun } from '@/components/ui/icons';
 
 export function Header({ title }: { title: string }) {
   const { theme, toggleTheme } = useTheme();
+  const isDark = theme === 'dark';
   const dispatch = useAppDispatch();
 
   return (
@@ -36,39 +37,15 @@ export function Header({ title }: { title: string }) {
       </div>
 
       <div className="flex shrink-0 items-center gap-2">
-        <NavLink
-          to="/interview-tasks"
-          aria-label="View Task Checklist"
-          className={({ isActive }) =>
-            clsx(
-              'cursor-pointer flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-semibold transition-all',
-              isActive
-                ? 'bg-brand-50 text-brand-700 dark:bg-brand-950/40 dark:text-brand-300 ring-1 ring-brand-200/50 dark:ring-brand-900/50'
-                : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white'
-            )
-          }
-        >
-          {({ isActive }) => (
-            <>
-              <IconCheckCircle
-                size={18}
-                className={clsx('transition-colors', isActive ? 'text-brand-600 dark:text-brand-400' : 'text-slate-500')}
-              />
-              <span>Task</span>
-            </>
-          )}
-        </NavLink>
-
-        <div className="h-5 w-px bg-slate-200 dark:bg-slate-800 mx-1" />
 
         <button
-          type="button"
-          aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-          onClick={toggleTheme()}
-          className="cursor-pointer rounded-xl p-2.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200"
-        >
-          {theme === 'light' ? <IconMoon size={18} /> : <IconSun size={18} />}
-        </button>
+  type="button"
+  aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+  onClick={toggleTheme}
+  className="cursor-pointer rounded-xl p-2.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+>
+  {isDark ? <IconSun size={18} /> : <IconMoon size={18} />}
+</button>
         <NotificationBell />
       </div>
     </header>

@@ -32,7 +32,7 @@ export function MainLayout() {
   }, [editingId]);
 
   return (
-    <div className="flex h-full min-h-0 flex-col bg-slate-100 dark:bg-slate-950">
+    <div className="flex min-h-screen min-h-0 flex-col bg-slate-100 dark:bg-slate-950">
       {/* Header is fixed at the top */}
       <Header title={title} />
 

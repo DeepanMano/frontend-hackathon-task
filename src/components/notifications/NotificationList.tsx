@@ -60,7 +60,7 @@ export function NotificationList({ filter = 'all', onRead }: NotificationListPro
         <button
           type="button"
           onClick={handleMarkAll}
-          className="text-xs font-medium text-brand-600 hover:underline"
+          className="cursor-pointer text-xs font-medium text-brand-600 hover:underline"
         >
           Mark all read
         </button>
@@ -84,7 +84,7 @@ export function NotificationList({ filter = 'all', onRead }: NotificationListPro
                 <button
                   type="button"
                   onClick={() => handleMarkRead(n.id)}
-                  className="shrink-0 text-xs text-brand-600 hover:underline"
+                  className="cursor-pointer shrink-0 text-xs text-brand-600 hover:underline"
                 >
                   Mark read
                 </button>
