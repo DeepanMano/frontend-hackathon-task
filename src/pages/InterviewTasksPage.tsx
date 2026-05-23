@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PageHeader } from '@/components/ui/Card';
 import { Card } from '@/components/ui/Card';
 import { Modal } from '@/components/modals/Modal';
@@ -238,8 +238,38 @@ function categoryClass(category: InterviewTask['category']) {
 }
 
 export function InterviewTasksPage() {
-  const [tasks, setTasks] = useState<InterviewTask[]>(DEFAULT_TASKS);
+  const [tasks, setTasks] = useState<InterviewTask[]>(() => {
+    // Load task states from localStorage.
+    // If nothing is saved (fresh environment), default all checklist items to done=true.
+    try {
+      const saved = localStorage.getItem('taskflow-interview-tasks');
+      if (saved) {
+        const savedStates = JSON.parse(saved) as Record<string, boolean>;
+        return DEFAULT_TASKS.map((t) => ({
+          ...t,
+          done: savedStates[t.id] ?? t.done,
+        }));
+      }
+    } catch (err) {
+      console.warn('Failed to load task states from localStorage:', err);
+    }
+
+    return DEFAULT_TASKS.map((t) => ({ ...t, done: true }));
+  });
   const [detailTask, setDetailTask] = useState<InterviewTask | null>(null);
+
+  // Save task states to localStorage whenever tasks change
+  useEffect(() => {
+    try {
+      const states = tasks.reduce<Record<string, boolean>>((acc, t) => {
+        acc[t.id] = t.done;
+        return acc;
+      }, {});
+      localStorage.setItem('taskflow-interview-tasks', JSON.stringify(states));
+    } catch (err) {
+      console.warn('Failed to save task states to localStorage:', err);
+    }
+  }, [tasks]);
 
   const toggleTask = (id: string) => {
     setTasks((prev) =>

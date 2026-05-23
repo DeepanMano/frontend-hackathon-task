@@ -36,7 +36,7 @@ export function StatsCards() {
       },
       {
         label: 'In progress',
-        value: 0,
+        value: data.inProgress,
         icon: IconProgress,
         accent: 'from-blue-500 to-blue-600',
       },
@@ -48,7 +48,7 @@ export function StatsCards() {
       },
       {
         label: 'Blocked',
-        value: null,
+        value: data.blocked,
         icon: IconAlert,
         accent: 'from-amber-500 to-orange-600',
       },
@@ -61,7 +61,7 @@ export function StatsCards() {
         <Card key={card.label} interactive className="relative overflow-hidden">
           <div
             className={clsx(
-              'absolute -right-4 -top-4 h-24 w-24 rounded-full bg-gradient-to-br opacity-10',
+              'absolute -right-4 -top-4 h-24 w-24 rounded-full bg-linear-to-br opacity-10',
               card.accent,
             )}
           />
@@ -77,7 +77,7 @@ export function StatsCards() {
             </div>
             <span
               className={clsx(
-                'flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br text-white shadow-sm',
+                'flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br text-white shadow-sm',
                 card.accent,
               )}
             >

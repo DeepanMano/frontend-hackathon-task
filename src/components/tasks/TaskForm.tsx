@@ -34,6 +34,15 @@ function FieldError({ message }: { message?: string }) {
   return <p className="mt-1 text-xs font-medium text-red-600 dark:text-red-400">{message}</p>;
 }
 
+function RequiredLabel({ children }: { children: string }) {
+  return (
+    <span className="flex items-center gap-1 text-sm font-medium text-slate-700 dark:text-slate-300">
+      {children}
+      <span className="text-red-600" style={{ color: '#FF0000' }}>*</span>
+    </span>
+  );
+}
+
 export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormProps) {
   const {
     register,
@@ -61,7 +70,8 @@ export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormPr
       noValidate
     >
       <Input
-        label="Title"
+        id="task-title"
+        label={<RequiredLabel>Title</RequiredLabel>}
         error={errors.title?.message}
         {...register('title')}
       />
@@ -88,7 +98,7 @@ export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormPr
             htmlFor="task-status"
             className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300"
           >
-            Status
+            <RequiredLabel>Status</RequiredLabel>
           </label>
           <select id="task-status" className={selectClassName(Boolean(errors.status))} {...register('status')}>
             <option value="">Select status...</option>
@@ -105,7 +115,7 @@ export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormPr
             htmlFor="task-priority"
             className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300"
           >
-            Priority
+            <RequiredLabel>Priority</RequiredLabel>
           </label>
           <select
             id="task-priority"
@@ -128,7 +138,7 @@ export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormPr
             htmlFor="task-assignee"
             className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300"
           >
-            Assignee
+            <RequiredLabel>Assignee</RequiredLabel>
           </label>
           <select
             id="task-assignee"
@@ -145,7 +155,8 @@ export function TaskForm({ initial, submitting, onSubmit, onCancel }: TaskFormPr
           <FieldError message={errors.assigneeId?.message} />
         </div>
         <Input
-          label="Due date"
+          id="task-due-date"
+          label={<RequiredLabel>Due date</RequiredLabel>}
           type="date"
           error={errors.dueDate?.message}
           {...register('dueDate')}

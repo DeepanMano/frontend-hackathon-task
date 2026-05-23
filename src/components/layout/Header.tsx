@@ -22,7 +22,7 @@ export function Header({ title }: { title: string }) {
           <IconMenu size={20} />
         </button>
         <div className="hidden items-center gap-3 lg:flex">
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-600 to-brand-700 text-sm font-bold text-white shadow-sm">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-brand-600 to-brand-700 text-sm font-bold text-white shadow-sm">
             TF
           </span>
           <div className="hidden h-6 w-px bg-slate-200 dark:bg-slate-700 xl:block" />
@@ -64,7 +64,7 @@ export function Header({ title }: { title: string }) {
         <button
           type="button"
           aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-          onClick={toggleTheme()}
+          onClick={toggleTheme}
           className="cursor-pointer rounded-xl p-2.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200"
         >
           {theme === 'light' ? <IconMoon size={18} /> : <IconSun size={18} />}

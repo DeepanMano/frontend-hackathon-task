@@ -140,7 +140,7 @@ export function TasksPage() {
     if (!deleteTarget) return;
     setDeleting(true);
     try {
-      await deleteTask(deleteTarget);
+      await deleteTask(deleteTarget.id);
       dispatch(removeTaskLocal(deleteTarget.id));
       await queryClient.invalidateQueries({ queryKey: ['task-stats'] });
       dispatch(pushToast({ type: 'success', message: 'Task deleted' }));

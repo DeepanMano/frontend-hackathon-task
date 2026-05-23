@@ -18,6 +18,8 @@ export function TaskList({
   onDelete,
   onSelect,
 }: TaskListProps) {
+  // Keep prop for API compatibility; TaskRow currently handles actions via onEdit/onSelect.
+  void onDelete;
   if (loading) {
     return (
       <div className="card flex min-h-[280px] items-center justify-center">
@@ -46,7 +48,7 @@ export function TaskList({
         <table className="min-w-full table-fixed text-left text-sm">
           <thead>
             <tr className="border-b border-slate-100 bg-slate-50/80 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:border-slate-800 dark:bg-slate-800/50">
-              <th className="w-[400px] min-w-[400px] max-w-[400px] px-5 py-3.5">Task</th>
+              <th className="w-100 min-w-100 max-w-100 px-5 py-3.5">Task</th>
               <th className="px-5 py-3.5">Status</th>
               <th className="px-5 py-3.5">Priority</th>
               <th className="px-5 py-3.5">Assignee</th>
@@ -60,6 +62,7 @@ export function TaskList({
                 key={task.id}
                 task={task}
                 onEdit={onEdit}
+                onDelete={onDelete}
                 onSelect={onSelect}
               />
             ))}

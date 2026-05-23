@@ -31,13 +31,13 @@ export function filterTasksLocal(
   }
 
   if (filters.search?.trim()) {
-    const q = filters.search.toLowerCase();
-    result = result.filter(
-      (t) =>
-        t.title.toLowerCase().includes(q) ||
-        t.description.toLowerCase().includes(q) ||
-        t.assigneeName.toLowerCase().includes(q),
-    );
+    const q = (filters.search || '').toLowerCase();
+    result = result.filter((t) => {
+      const title = (t.title || '').toLowerCase();
+      const description = (t.description || '').toLowerCase();
+      const assignee = (t.assigneeName || '').toLowerCase();
+      return title.includes(q) || description.includes(q) || assignee.includes(q);
+    });
   }
 
   if (filters.assigneeId) {

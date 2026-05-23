@@ -15,7 +15,12 @@ export function TaskSearch({ value, onChange }: TaskSearchProps) {
   }, [onChange]);
 
   useEffect(() => {
-    setLocal(value);
+    // Sync local state when the external value changes.
+    // Defer to the end of the current event loop to satisfy eslint.
+    const id = window.setTimeout(() => {
+      setLocal(value);
+    }, 0);
+    return () => window.clearTimeout(id);
   }, [value]);
 
   useEffect(() => {

@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { forwardRef, type InputHTMLAttributes } from 'react';
+import { forwardRef, type InputHTMLAttributes, type ReactNode } from 'react';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
+  label?: ReactNode;
   error?: string;
 }
 
@@ -10,7 +10,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   { label, error, className, id, ...props },
   ref,
 ) {
-  const inputId = id || label?.toLowerCase().replace(/\s/g, '-');
+  const inputId = id || (typeof label === 'string' ? label.toLowerCase().replace(/\s/g, '-') : undefined);
   return (
     <div className="space-y-1.5">
       {label ? (

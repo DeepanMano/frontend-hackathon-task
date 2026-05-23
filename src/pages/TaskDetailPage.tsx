@@ -47,9 +47,11 @@ export function TaskDetailPage() {
     const from = (location.state as { from?: string })?.from;
     if (from) {
       navigate(from);
-    } else {
-      navigate('/tasks');
+      return;
     }
+
+    // Fallback: keep consistent with dashboard requirements.
+    navigate('/dashboard');
   };
 
   if (loading) {
@@ -82,7 +84,7 @@ export function TaskDetailPage() {
       <Card className="space-y-6">
         <div className="min-w-0">
           <h2
-            className="line-clamp-2 break-words text-2xl font-bold tracking-tight text-slate-900 dark:text-white"
+            className="line-clamp-2 wrap-break-word text-2xl font-bold tracking-tight text-slate-900 dark:text-white"
             title={task.title}
           >
             {task.title}

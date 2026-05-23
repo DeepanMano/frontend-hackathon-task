@@ -14,19 +14,23 @@ interface TaskRowProps {
 export function TaskRow({ task, onEdit, onDelete, onSelect }: TaskRowProps) {
   const overdue = isOverdue(task.dueDate) && task.status !== 'done';
 
+  const title = task.title?.trim() || 'Untitled task';
+  const projectName = task.projectName?.trim() || 'No project';
+  const assigneeName = task.assigneeName?.trim() || 'Unassigned';
+
   return (
     <tr
       className="task-row-enter cursor-pointer transition-colors hover:bg-brand-50/40 dark:hover:bg-slate-800/40"
       onClick={() => onSelect(task)}
     >
-      <td className="w-[400px] min-w-[400px] max-w-[400px] px-5 py-4">
+      <td className="w-100 min-w-100 max-w-100 px-5 py-4">
         <div
-          className="line-clamp-2 break-words font-medium text-slate-900 dark:text-slate-100"
-          title={task.title}
+          className="line-clamp-2 wrap-break-word font-medium text-slate-900 dark:text-slate-100"
+          title={title}
         >
-          {task.title?.trim()}
+          {title}
         </div>
-        <div className="mt-0.5 text-xs text-slate-500">{task.projectName.trim() || ''}</div>
+        <div className="mt-0.5 text-xs text-slate-500">{projectName}</div>
       </td>
       <td className="px-5 py-4">
         <StatusBadge status={task.status} />
@@ -36,10 +40,10 @@ export function TaskRow({ task, onEdit, onDelete, onSelect }: TaskRowProps) {
       </td>
       <td className="px-5 py-4">
         <div className="flex items-center gap-2.5">
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-brand-100 to-brand-200 text-xs font-bold text-brand-800 dark:from-brand-900 dark:to-brand-800 dark:text-brand-200">
-            {getAssigneeInitials(task.assigneeName)}
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-linear-to-br from-brand-100 to-brand-200 text-xs font-bold text-brand-800 dark:from-brand-900 dark:to-brand-800 dark:text-brand-200">
+            {getAssigneeInitials(assigneeName)}
           </span>
-          <span className="text-sm text-slate-600 dark:text-slate-400">{task.assigneeName}</span>
+          <span className="text-sm text-slate-600 dark:text-slate-400">{assigneeName}</span>
         </div>
       </td>
       <td className="px-5 py-4">
